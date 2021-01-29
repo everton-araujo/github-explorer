@@ -1,5 +1,10 @@
 import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, Link } from 'react-router-dom';
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+
+import logoImg from '../../assets/logo.svg';
+
+import { Header, RepositoryInfo, Issues } from './styles';
 
 interface RepositoryParams {
   repository: string;
@@ -8,7 +13,56 @@ interface RepositoryParams {
 const Repository: React.FC = () => {
   const { params } = useRouteMatch<RepositoryParams>();
 
-  return <h1> Repository:{params.repository}</h1>;
+  return (
+    <>
+      <Header>
+        <img src={logoImg} alt="Github Explorer" />
+        <Link to="/">
+          <FiChevronLeft size={16} />
+          Voltar
+        </Link>
+      </Header>
+
+      <RepositoryInfo>
+        <header>
+          <img
+            src="data:image/jpeg;base64,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"
+            alt="Gatinho"
+          />
+          <div>
+            <strong>gatinho/nervoso</strong>
+            <p>descrição do repositório</p>
+          </div>
+        </header>
+
+        <ul>
+          <li>
+            <strong>1808</strong>
+            <span>Stars</span>
+          </li>
+          <li>
+            <strong>48</strong>
+            <span>Forks</span>
+          </li>
+          <li>
+            <strong>67</strong>
+            <span>Issues abertas</span>
+          </li>
+        </ul>
+      </RepositoryInfo>
+
+      <Issues>
+        <Link to="sadfsad">
+          <div>
+            <strong>asdasd</strong>
+            <p>adsasdasd</p>
+          </div>
+
+          <FiChevronRight size={20} />
+        </Link>
+      </Issues>
+    </>
+  );
 };
 
 export default Repository;
